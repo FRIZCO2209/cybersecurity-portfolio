@@ -1,0 +1,2175 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Joseph Abraham — Aspiring SOC Analyst | Cybersecurity Portfolio</title>
+<meta name="description" content="Portfolio of Joseph Abraham, a BCA graduate and CEH learner building practical skills in threat detection, log analysis, incident response and security operations." />
+<meta name="author" content="Joseph Abraham" />
+<meta name="theme-color" content="#06080b" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Joseph Abraham — Aspiring SOC Analyst" />
+<meta property="og:description" content="Detect Threats. Investigate Incidents. Protect What Matters." />
+<meta property="og:url" content="[ADD DOMAIN OR DEPLOYED URL]" />
+<meta property="og:image" content="[ADD SOCIAL PREVIEW IMAGE URL]" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Favicon: inline shield + terminal monogram -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0f14'/%3E%3Cpath d='M16 5.5l8.5 3.6v6.6c0 5.6-3.6 9-8.5 10.4-4.9-1.4-8.5-4.8-8.5-10.4V9.1z' fill='none' stroke='%233fe08a' stroke-width='1.8'/%3E%3Cpath d='M12 16.2l3 3 5.5-6.4' fill='none' stroke='%2338bdf8' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+/* =========================================================
+   1. DESIGN TOKENS
+   ========================================================= */
+:root{
+  --bg:#06080b;
+  --bg-soft:#0a0e13;
+  --surface:#0e131a;
+  --surface-2:#131b25;
+  --surface-3:#18212c;
+  --border:#1b2532;
+  --border-2:#27343f;
+  --text:#dbe4ee;
+  --dim:#93a3b5;
+  --faint:#63727f;
+
+  --green:#3fe08a;
+  --cyan:#38bdf8;
+  --blue:#6b93ff;
+  --amber:#f0b429;
+  --red:#ff6b6b;
+
+  --grid-line:rgba(255,255,255,.021);
+  --glow-green:0 0 26px -8px rgba(63,224,138,.55);
+  --glow-cyan:0 0 26px -8px rgba(56,189,248,.5);
+  --shadow:0 22px 50px -34px #000;
+
+  --r:10px;
+  --r-lg:14px;
+  --mono:ui-monospace,"JetBrains Mono","SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --maxw:1180px;
+  --nav-h:64px;
+}
+
+[data-theme="light"]{
+  --bg:#f3f6fa;
+  --bg-soft:#eaeff6;
+  --surface:#ffffff;
+  --surface-2:#f2f5f9;
+  --surface-3:#e8eef5;
+  --border:#d9e2ec;
+  --border-2:#c3d0de;
+  --text:#0d1723;
+  --dim:#4d6072;
+  --faint:#7a8b9c;
+  --green:#0a7d4a;
+  --cyan:#0b6ea8;
+  --blue:#2f5fd0;
+  --amber:#a06a00;
+  --red:#c0392b;
+  --grid-line:rgba(0,0,0,.035);
+  --glow-green:0 0 22px -12px rgba(10,125,74,.5);
+  --glow-cyan:0 0 22px -12px rgba(11,110,168,.5);
+  --shadow:0 20px 45px -38px rgba(15,30,50,.7);
+}
+
+/* =========================================================
+   2. BASE
+   ========================================================= */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 20px)}
+body{
+  margin:0;
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.68;
+  color:var(--text);
+  background-color:var(--bg);
+  background-image:
+    linear-gradient(var(--grid-line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+  background-size:46px 46px;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(900px 500px at 12% -8%,rgba(63,224,138,.07),transparent 60%),
+    radial-gradient(800px 500px at 92% 4%,rgba(56,189,248,.06),transparent 60%);
+}
+img{max-width:100%;display:block}
+a{color:var(--cyan);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font:inherit;color:inherit}
+h1,h2,h3,h4{line-height:1.2;margin:0;letter-spacing:-.02em}
+p{margin:0 0 1rem}
+ul{margin:0;padding:0;list-style:none}
+::selection{background:rgba(63,224,138,.28);color:var(--text)}
+
+:focus-visible{
+  outline:2px solid var(--green);
+  outline-offset:3px;
+  border-radius:4px;
+}
+
+.skip-link{
+  position:absolute;left:-9999px;top:0;z-index:200;
+  background:var(--green);color:#04140c;padding:.7rem 1.1rem;
+  font-family:var(--mono);font-size:.8rem;border-radius:0 0 8px 0;
+}
+.skip-link:focus{left:0}
+
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+/* =========================================================
+   3. UTILITIES
+   ========================================================= */
+.mono{font-family:var(--mono)}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--green);
+  display:flex;align-items:center;gap:.6rem;
+  margin:0 0 .9rem;
+}
+.eyebrow::before{content:"▍";color:var(--green);animation:blink 1.2s steps(2,start) infinite}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+
+.sec-head{max-width:760px;margin-bottom:44px}
+.sec-title{font-size:clamp(1.7rem,3.4vw,2.4rem);font-weight:800;letter-spacing:-.03em}
+.sec-title span{color:var(--green)}
+.sec-sub{color:var(--dim);margin-top:.85rem;font-size:.98rem;max-width:70ch}
+
+section{padding:88px 0;position:relative}
+section+section{border-top:1px solid var(--border)}
+
+.badge{
+  display:inline-flex;align-items:center;gap:.35rem;
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.11em;text-transform:uppercase;
+  padding:.28rem .55rem;border-radius:999px;
+  border:1px solid var(--border-2);color:var(--dim);background:var(--surface-2);
+  white-space:nowrap;
+}
+.badge.green{color:var(--green);border-color:rgba(63,224,138,.35);background:rgba(63,224,138,.07)}
+.badge.cyan{color:var(--cyan);border-color:rgba(56,189,248,.35);background:rgba(56,189,248,.07)}
+.badge.amber{color:var(--amber);border-color:rgba(240,180,41,.35);background:rgba(240,180,41,.08)}
+.badge.blue{color:var(--blue);border-color:rgba(107,147,255,.35);background:rgba(107,147,255,.08)}
+
+.dot{width:7px;height:7px;border-radius:50%;display:inline-block;background:var(--green);box-shadow:0 0 8px var(--green)}
+.dot.amber{background:var(--amber);box-shadow:0 0 8px var(--amber)}
+.dot.cyan{background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+
+.ph{
+  font-family:var(--mono);font-size:.78rem;color:var(--amber);
+  border:1px dashed rgba(240,180,41,.45);background:rgba(240,180,41,.06);
+  padding:.15rem .45rem;border-radius:5px;display:inline-block;
+}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:.8rem 1.25rem;border-radius:8px;border:1px solid var(--border-2);
+  background:var(--surface-2);color:var(--text);cursor:pointer;
+  transition:transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+}
+.btn:hover{transform:translateY(-2px);border-color:var(--green);box-shadow:var(--glow-green);text-decoration:none}
+.btn-primary{background:linear-gradient(180deg,rgba(63,224,138,.16),rgba(63,224,138,.06));border-color:rgba(63,224,138,.5);color:var(--green)}
+.btn-primary:hover{background:rgba(63,224,138,.2)}
+.btn-ghost{background:transparent}
+.btn-sm{padding:.55rem .85rem;font-size:.7rem}
+
+.link-btn{
+  background:none;border:0;padding:0;cursor:pointer;
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--cyan);
+}
+.link-btn:hover{text-decoration:underline}
+
+/* Cards */
+.card{
+  background:linear-gradient(180deg,var(--surface),var(--bg-soft));
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  padding:22px;
+  transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+  position:relative;
+  overflow:hidden;
+}
+.card::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(120deg,transparent 40%,rgba(63,224,138,.05) 50%,transparent 60%);
+  opacity:0;transition:opacity .3s ease;
+}
+.card:hover{border-color:var(--border-2);transform:translateY(-3px);box-shadow:var(--shadow)}
+.card:hover::after{opacity:1}
+
+/* =========================================================
+   4. NAVBAR
+   ========================================================= */
+.progress{
+  position:fixed;top:0;left:0;height:2px;width:0;z-index:120;
+  background:linear-gradient(90deg,var(--green),var(--cyan));
+  box-shadow:0 0 12px rgba(63,224,138,.6);
+  transition:width .1s linear;
+}
+.nav{
+  position:sticky;top:0;z-index:100;
+  height:var(--nav-h);
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+@supports not (background: color-mix(in srgb, red, blue)){
+  .nav{background:rgba(6,8,11,.9)}
+  [data-theme="light"] .nav{background:rgba(243,246,250,.92)}
+}
+.nav-inner{
+  max-width:var(--maxw);margin:0 auto;padding:0 24px;height:100%;
+  display:flex;align-items:center;gap:18px;
+}
+.brand{display:flex;align-items:center;gap:.6rem;font-family:var(--mono);font-weight:700;font-size:.9rem;letter-spacing:.02em;color:var(--text);flex-shrink:0}
+.brand:hover{text-decoration:none}
+.brand svg{width:26px;height:26px;flex-shrink:0}
+.brand small{display:block;font-size:.6rem;letter-spacing:.16em;color:var(--faint);font-weight:400}
+
+.nav-links{
+  display:flex;align-items:center;gap:2px;margin-left:auto;
+  overflow-x:auto;scrollbar-width:none;
+}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--dim);padding:.5rem .6rem;border-radius:6px;white-space:nowrap;
+  transition:color .15s ease,background .15s ease;position:relative;
+}
+.nav-links a:hover{color:var(--text);background:var(--surface-2);text-decoration:none}
+.nav-links a.active{color:var(--green)}
+.nav-links a.active::after{
+  content:"";position:absolute;left:.6rem;right:.6rem;bottom:2px;height:1px;background:var(--green);
+}
+
+.nav-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.icon-btn{
+  width:36px;height:36px;display:grid;place-items:center;
+  border:1px solid var(--border);background:var(--surface);border-radius:8px;cursor:pointer;
+  transition:border-color .15s ease,color .15s ease;color:var(--dim);
+}
+.icon-btn:hover{border-color:var(--green);color:var(--green)}
+.icon-btn svg{width:17px;height:17px}
+.hamburger{display:none}
+
+.mobile-menu{
+  display:none;
+  border-bottom:1px solid var(--border);
+  background:var(--bg-soft);
+  padding:10px 24px 18px;
+}
+.mobile-menu.open{display:block}
+.mobile-menu a{
+  display:block;font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--dim);padding:.7rem .2rem;border-bottom:1px solid var(--border);
+}
+.mobile-menu a:hover,.mobile-menu a.active{color:var(--green);text-decoration:none}
+
+/* =========================================================
+   5. HERO
+   ========================================================= */
+.hero{padding:76px 0 84px;border-top:0}
+.hero-grid{
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+  gap:52px;align-items:center;
+}
+.hero-status{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--dim);border:1px solid var(--border);background:var(--surface);
+  padding:.4rem .75rem;border-radius:999px;margin-bottom:22px;
+}
+.hero h1{
+  font-size:clamp(2.3rem,6vw,4rem);font-weight:800;letter-spacing:-.045em;line-height:1.02;
+  margin-bottom:14px;
+}
+.hero h1 .accent{
+  background:linear-gradient(90deg,var(--green),var(--cyan));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-role{
+  font-family:var(--mono);font-size:clamp(.82rem,1.6vw,1rem);
+  letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:18px;
+}
+.hero-tag{
+  font-size:clamp(1.05rem,2.2vw,1.35rem);font-weight:600;color:var(--text);
+  border-left:2px solid var(--green);padding-left:14px;margin-bottom:20px;
+}
+.hero-desc{color:var(--dim);max-width:60ch;font-size:.98rem}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 22px}
+.hero-social{display:flex;flex-wrap:wrap;gap:8px}
+.hero-social a{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--dim);border:1px solid var(--border);border-radius:999px;
+  padding:.35rem .8rem;transition:.15s ease;
+}
+.hero-social a:hover{color:var(--green);border-color:var(--green);text-decoration:none}
+
+/* Terminal card */
+.term{
+  border:1px solid var(--border-2);border-radius:var(--r-lg);
+  background:linear-gradient(180deg,#0b1017,#080c11);
+  box-shadow:var(--shadow),0 0 60px -40px rgba(63,224,138,.6);
+  overflow:hidden;font-family:var(--mono);
+}
+[data-theme="light"] .term{background:linear-gradient(180deg,#0e141c,#0a0f16)}
+.term-bar{
+  display:flex;align-items:center;gap:7px;
+  padding:.6rem .8rem;border-bottom:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.02);
+}
+.term-bar .circle{width:10px;height:10px;border-radius:50%}
+.term-bar .r{background:#ff5f57}.term-bar .y{background:#febc2e}.term-bar .g{background:#28c840}
+.term-title{
+  margin-left:8px;font-size:.68rem;color:#7d8b99;letter-spacing:.06em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.term-body{padding:18px 18px 8px;font-size:.8rem;line-height:1.85;color:#c3d0dd;min-height:262px}
+.term-body .cmd{color:#3fe08a}
+.term-body .out{color:#8fa3b5}
+.term-body .key{color:#38bdf8}
+.term-body .val{color:#e2e9f1}
+.term-cursor{display:inline-block;width:8px;height:14px;background:#3fe08a;vertical-align:-2px;animation:blink 1s steps(2,start) infinite}
+.term-foot{
+  padding:.6rem .9rem;border-top:1px solid rgba(255,255,255,.06);
+  font-size:.63rem;letter-spacing:.08em;color:#5c6b7a;text-transform:uppercase;
+}
+
+/* =========================================================
+   6. ABOUT
+   ========================================================= */
+.about-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);gap:44px;align-items:start}
+.about-text p{color:var(--dim);font-size:.97rem}
+.about-text strong{color:var(--text);font-weight:600}
+
+.profile-panel{
+  border:1px solid var(--border);border-radius:var(--r-lg);
+  background:linear-gradient(180deg,var(--surface),var(--bg-soft));
+  overflow:hidden;
+}
+.panel-head{
+  padding:.85rem 1.1rem;border-bottom:1px solid var(--border);
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green);
+  display:flex;align-items:center;gap:.5rem;background:rgba(63,224,138,.04);
+}
+.panel-row{
+  display:flex;justify-content:space-between;gap:14px;
+  padding:.75rem 1.1rem;border-bottom:1px solid var(--border);
+  font-size:.84rem;
+}
+.panel-row:last-child{border-bottom:0}
+.panel-row dt{color:var(--faint);font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}
+.panel-row dd{margin:0;color:var(--text);font-weight:500;text-align:right}
+
+/* =========================================================
+   7. SKILLS
+   ========================================================= */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.tab{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;
+  padding:.5rem .85rem;border-radius:999px;border:1px solid var(--border);
+  background:var(--surface);color:var(--dim);cursor:pointer;transition:.15s ease;
+}
+.tab:hover{color:var(--text);border-color:var(--border-2)}
+.tab.active{color:var(--green);border-color:rgba(63,224,138,.45);background:rgba(63,224,138,.08)}
+
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.skill{
+  border:1px solid var(--border);border-radius:var(--r);
+  background:var(--surface);padding:14px 15px;
+  display:flex;flex-direction:column;gap:.55rem;
+  transition:border-color .18s ease,transform .18s ease;
+}
+.skill:hover{border-color:var(--border-2);transform:translateY(-2px)}
+.skill-name{font-size:.88rem;font-weight:500}
+.skill-bar{height:3px;border-radius:2px;background:var(--surface-3);overflow:hidden}
+.skill-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--cyan));transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.skill-meta{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.63rem;letter-spacing:.09em;text-transform:uppercase;color:var(--faint)}
+
+/* =========================================================
+   8. TIMELINE (Education / Experience)
+   ========================================================= */
+.timeline{position:relative;padding-left:28px;max-width:840px}
+.timeline::before{
+  content:"";position:absolute;left:6px;top:6px;bottom:6px;width:1px;
+  background:linear-gradient(180deg,var(--green),var(--cyan),transparent);
+}
+.tl-item{position:relative;padding-bottom:34px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{
+  content:"";position:absolute;left:-28px;top:7px;width:13px;height:13px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--green);box-shadow:0 0 0 4px rgba(63,224,138,.09);
+}
+.tl-item.pending::before{border-color:var(--amber);box-shadow:0 0 0 4px rgba(240,180,41,.1)}
+.tl-date{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:.35rem}
+.tl-title{font-size:1.05rem;font-weight:700;margin-bottom:.2rem}
+.tl-org{font-size:.87rem;color:var(--dim);margin-bottom:.6rem}
+.tl-body{color:var(--dim);font-size:.9rem}
+.tl-body ul{display:flex;flex-direction:column;gap:.3rem}
+.tl-body li{padding-left:16px;position:relative}
+.tl-body li::before{content:"›";position:absolute;left:0;color:var(--green);font-family:var(--mono)}
+
+/* =========================================================
+   9. CERTIFICATIONS
+   ========================================================= */
+.cert-group{margin-bottom:36px}
+.cert-group h3{
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:16px;display:flex;align-items:center;gap:.55rem;
+}
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.cert-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:.6rem}
+.cert-name{font-size:.98rem;font-weight:600}
+.cert-org{font-size:.82rem;color:var(--dim);margin-bottom:.7rem}
+.cert-meta{display:flex;flex-direction:column;gap:.35rem;font-family:var(--mono);font-size:.7rem;color:var(--faint)}
+.cert-meta span b{color:var(--dim);font-weight:500}
+
+/* =========================================================
+   10. LABS / PROJECTS
+   ========================================================= */
+.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:26px}
+.search-box{
+  position:relative;flex:1 1 260px;max-width:360px;
+}
+.search-box input{
+  width:100%;padding:.65rem .85rem .65rem 2.2rem;
+  background:var(--surface);border:1px solid var(--border);border-radius:8px;
+  color:var(--text);font-family:var(--mono);font-size:.78rem;
+}
+.search-box input::placeholder{color:var(--faint)}
+.search-box input:focus{border-color:var(--green);outline:none}
+.search-box svg{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--faint)}
+
+.filters{display:flex;flex-wrap:wrap;gap:7px}
+.chip{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:.42rem .75rem;border-radius:999px;border:1px solid var(--border);
+  background:var(--surface);color:var(--dim);cursor:pointer;transition:.15s ease;
+}
+.chip:hover{color:var(--text)}
+.chip.active{color:var(--green);border-color:rgba(63,224,138,.45);background:rgba(63,224,138,.08)}
+
+.grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:.7rem}
+.card-title{font-size:1.02rem;font-weight:700}
+.card-sum{color:var(--dim);font-size:.88rem;margin-bottom:.9rem}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem}
+.tags li{
+  font-family:var(--mono);font-size:.63rem;letter-spacing:.05em;
+  color:var(--dim);background:var(--surface-2);border:1px solid var(--border);
+  padding:.2rem .5rem;border-radius:4px;
+}
+.detail{
+  border-top:1px dashed var(--border-2);margin-top:.9rem;padding-top:.9rem;
+  display:none;flex-direction:column;gap:.75rem;
+}
+.detail.open{display:flex}
+.detail dl{display:grid;gap:.6rem;margin:0}
+.detail dt{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.15rem}
+.detail dd{margin:0;font-size:.85rem;color:var(--dim)}
+.card-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:1rem}
+
+.empty{
+  grid-column:1/-1;text-align:center;padding:44px 20px;color:var(--faint);
+  font-family:var(--mono);font-size:.8rem;border:1px dashed var(--border);border-radius:var(--r-lg);
+}
+
+.note{
+  display:flex;gap:.7rem;align-items:flex-start;
+  border:1px solid rgba(240,180,41,.3);background:rgba(240,180,41,.06);
+  border-radius:var(--r);padding:.8rem 1rem;margin-bottom:26px;
+  font-size:.82rem;color:var(--dim);
+}
+.note b{color:var(--amber);font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;flex-shrink:0;padding-top:2px}
+
+/* =========================================================
+   11. TOOLS
+   ========================================================= */
+.tool-group{margin-bottom:28px}
+.tool-group h3{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:14px;
+}
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.tool{
+  display:flex;align-items:center;gap:.7rem;
+  border:1px solid var(--border);border-radius:var(--r);background:var(--surface);
+  padding:11px 12px;transition:border-color .18s ease,transform .18s ease;
+}
+.tool:hover{border-color:var(--border-2);transform:translateY(-2px)}
+.tool-mono{
+  width:30px;height:30px;flex-shrink:0;display:grid;place-items:center;
+  border-radius:7px;font-family:var(--mono);font-size:.68rem;font-weight:700;
+  background:var(--surface-3);color:var(--cyan);border:1px solid var(--border);
+}
+.tool-name{font-size:.82rem;font-weight:500}
+
+/* =========================================================
+   12. SECURITY FOCUS
+   ========================================================= */
+.focus-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.focus-item{
+  border:1px solid var(--border);border-left:2px solid var(--green);
+  border-radius:0 var(--r) var(--r) 0;background:var(--surface);padding:18px;
+}
+.focus-item h3{font-size:.95rem;margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem}
+.focus-item h3 .idx{font-family:var(--mono);font-size:.68rem;color:var(--green)}
+.focus-item p{color:var(--dim);font-size:.85rem;margin:0}
+
+/* =========================================================
+   13. BLOG
+   ========================================================= */
+.post-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.post{cursor:pointer;display:flex;flex-direction:column}
+.post-date{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:.5rem}
+.post h3{font-size:1rem;margin-bottom:.55rem}
+.post p{color:var(--dim);font-size:.86rem;margin:0 0 .9rem}
+.post .tags{margin-bottom:0;margin-top:auto}
+
+/* Modal */
+.modal{position:fixed;inset:0;z-index:150;display:none;align-items:center;justify-content:center;padding:24px}
+.modal.open{display:flex}
+.modal-bg{position:absolute;inset:0;background:rgba(2,4,7,.78);backdrop-filter:blur(4px)}
+.modal-box{
+  position:relative;z-index:1;max-width:760px;width:100%;max-height:82vh;overflow-y:auto;
+  background:var(--surface);border:1px solid var(--border-2);border-radius:var(--r-lg);
+  padding:30px;
+}
+.modal-close{
+  position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:8px;
+  border:1px solid var(--border);background:var(--surface-2);cursor:pointer;color:var(--dim);
+  display:grid;place-items:center;
+}
+.modal-close:hover{color:var(--green);border-color:var(--green)}
+.modal-box h2{font-size:1.4rem;margin-bottom:.6rem}
+.modal-box .body{color:var(--dim);font-size:.92rem}
+.modal-box code{
+  font-family:var(--mono);font-size:.82rem;background:var(--surface-2);
+  border:1px solid var(--border);padding:.1rem .35rem;border-radius:4px;color:var(--cyan);
+}
+.modal-box pre{
+  font-family:var(--mono);font-size:.78rem;background:var(--bg-soft);
+  border:1px solid var(--border);border-radius:8px;padding:14px;overflow-x:auto;color:var(--dim);
+}
+
+/* =========================================================
+   14. RESUME + CONTACT
+   ========================================================= */
+.resume-panel{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:30px;align-items:center;
+  border:1px solid var(--border);border-radius:var(--r-lg);
+  background:linear-gradient(120deg,var(--surface),var(--bg-soft));
+  padding:30px;
+}
+.resume-panel h3{font-size:1.15rem;margin-bottom:.5rem}
+.resume-panel p{color:var(--dim);font-size:.9rem;margin:0}
+.resume-actions{display:flex;flex-wrap:wrap;gap:10px}
+
+.contact-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:40px;align-items:start}
+.contact-list{display:flex;flex-direction:column;gap:12px}
+.contact-item{
+  display:flex;align-items:center;gap:.8rem;
+  border:1px solid var(--border);border-radius:var(--r);background:var(--surface);
+  padding:12px 14px;font-size:.86rem;color:var(--dim);
+}
+.contact-item .k{
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--faint);min-width:80px;
+}
+.contact-item .v{color:var(--text);overflow-wrap:anywhere}
+
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:.4rem}
+.field.full{grid-column:1/-1}
+.field label{
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);
+}
+.field input,.field textarea{
+  width:100%;padding:.75rem .85rem;border-radius:8px;
+  background:var(--surface);border:1px solid var(--border);color:var(--text);
+  font-family:var(--sans);font-size:.9rem;transition:border-color .15s ease;
+}
+.field textarea{resize:vertical;min-height:130px}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--green)}
+.field .err{font-family:var(--mono);font-size:.68rem;color:var(--red);min-height:1em}
+.field.invalid input,.field.invalid textarea{border-color:var(--red)}
+
+.form-msg{
+  margin-top:14px;padding:.8rem 1rem;border-radius:8px;font-size:.84rem;display:none;
+}
+.form-msg.show{display:block}
+.form-msg.ok{border:1px solid rgba(63,224,138,.4);background:rgba(63,224,138,.08);color:var(--green)}
+.form-msg.err{border:1px solid rgba(255,107,107,.4);background:rgba(255,107,107,.08);color:var(--red)}
+.form-msg.info{border:1px solid rgba(56,189,248,.4);background:rgba(56,189,248,.08);color:var(--cyan)}
+
+/* Find me online */
+.links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.online-link{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  border:1px solid var(--border);border-radius:var(--r);background:var(--surface);
+  padding:12px 14px;font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;
+  color:var(--dim);transition:.16s ease;
+}
+.online-link:hover{color:var(--green);border-color:var(--green);text-decoration:none;transform:translateY(-2px)}
+.online-link .arrow{color:var(--faint)}
+.online-link:hover .arrow{color:var(--green)}
+.online-link.is-placeholder{color:var(--amber);border-style:dashed;border-color:rgba(240,180,41,.35);cursor:default}
+.online-link.is-placeholder:hover{transform:none;color:var(--amber)}
+
+/* =========================================================
+   15. FOOTER
+   ========================================================= */
+footer{
+  border-top:1px solid var(--border);padding:40px 0 34px;background:var(--bg-soft);
+}
+.foot-grid{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:flex-start}
+.foot-brand{font-family:var(--mono);font-size:.8rem;color:var(--dim);max-width:420px}
+.foot-brand strong{color:var(--text);display:block;margin-bottom:.4rem;letter-spacing:.05em}
+.foot-msg{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--green);margin-top:18px;
+}
+.foot-links{display:flex;flex-wrap:wrap;gap:14px;font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em}
+.foot-links a{color:var(--faint)}
+.foot-links a:hover{color:var(--green);text-decoration:none}
+
+/* =========================================================
+   16. RESPONSIVE
+   ========================================================= */
+@media (max-width:1080px){
+  .nav-links{display:none}
+  .hamburger{display:grid}
+  .hero-grid{grid-template-columns:1fr;gap:38px}
+  .about-grid{grid-template-columns:1fr;gap:32px}
+  .contact-grid{grid-template-columns:1fr;gap:30px}
+  .resume-panel{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  section{padding:64px 0}
+  .wrap{padding:0 18px}
+  .nav-inner{padding:0 18px}
+  .form-grid{grid-template-columns:1fr}
+  .grid-3{grid-template-columns:1fr}
+  .hero{padding:52px 0 64px}
+  .term-body{min-height:auto;font-size:.74rem}
+  .modal-box{padding:22px}
+}
+
+/* =========================================================
+   17. MOTION PREFERENCES
+   ========================================================= */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+  .card:hover,.btn:hover,.tool:hover,.online-link:hover{transform:none}
+}
+</style>
+</head>
+
+<body>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- ================= NAVBAR ================= -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#home" aria-label="Joseph Abraham — home">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="7" fill="none"/>
+        <path d="M16 4.5l9 3.8v7c0 6-3.9 9.6-9 11.2C10.9 24.9 7 21.3 7 15.3v-7z" fill="none" stroke="currentColor" stroke-width="1.6" style="color:var(--green)"/>
+        <path d="M11.6 16.2l3 3 5.8-6.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan)"/>
+      </svg>
+      <span>JOSEPH ABRAHAM<small>SEC_ANALYST // PORTFOLIO</small></span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Primary">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#labs">Labs</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#experience">Experience</a>
+      <a href="#blog">Blog</a>
+      <a href="#resume">Resume</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch to light theme" title="Toggle theme">
+        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+      <button class="icon-btn hamburger" id="hamburger" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile"></nav>
+</header>
+
+<main id="main">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="home">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <p class="hero-status"><span class="dot"></span> PROFILE: ENTRY-LEVEL</p>
+          <h1>JOSEPH <span class="accent">ABRAHAM</span></h1>
+          <p class="hero-role">Aspiring SOC Analyst</p>
+          <p class="hero-tag">"Securing What Matters Most."</p>
+          <p class="hero-desc">
+            I am a BCA graduate building my expertise in cybersecurity through CEH studies, hands-on
+            security labs, and continuous technical learning. My goal is to develop the skills needed
+            to identify suspicious activity, investigate security events, understand threats, and
+            contribute to effective security operations.
+          </p>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#projects">Explore My Projects</a>
+            <a class="btn" href="#resume">View My Resume</a>
+            <a class="btn btn-ghost" href="#contact">Contact Me</a>
+          </div>
+
+          <div class="hero-social" id="heroSocial" aria-label="Secondary profile links"></div>
+        </div>
+
+        <!-- Terminal identity card -->
+        <div class="term" role="img" aria-label="Illustrative terminal profile card for Joseph Abraham">
+          <div class="term-bar">
+            <span class="circle r"></span><span class="circle y"></span><span class="circle g"></span>
+            <span class="term-title">joseph@sec-ops: ~/profile</span>
+          </div>
+          <div class="term-body" id="termBody"></div>
+          <div class="term-foot">Illustrative profile display — not a live system session</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">[ 01 ] // ABOUT</p>
+        <h2 class="sec-title">About <span>Me</span></h2>
+        <p class="sec-sub">A focused, honest overview of where I am today and where I am heading.</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I am <strong>Joseph Abraham</strong>, a Bachelor of Computer Applications (BCA) graduate based in
+            <strong>Kerala, India</strong>. My interest in cybersecurity started with a simple question — how do
+            defenders actually spot an attack before it causes damage? That question led me into security
+            operations, log analysis, and ethical hacking.
+          </p>
+          <p>
+            I am currently studying for the <strong>Certified Ethical Hacker (CEH)</strong> course, where I am
+            learning reconnaissance, scanning and enumeration, vulnerability assessment, web application
+            security fundamentals, and authorized penetration testing methodology. Alongside the course, I
+            practise in hands-on environments such as <strong>TryHackMe</strong> and Capture the Flag (CTF)
+            challenges, documenting what I learn as I go.
+          </p>
+          <p>
+            My main area of interest is <strong>Security Operations Center (SOC) workflow</strong> — how alerts
+            are triaged, how logs from Windows and Linux systems are read and correlated, how indicators of
+            compromise are identified, and how incidents are investigated and reported. I am building
+            foundational knowledge in SIEM concepts, the incident response lifecycle, phishing analysis,
+            network traffic investigation, the MITRE ATT&CK framework, and vulnerability management.
+          </p>
+          <p>
+            I practise <strong>ethical, authorized security testing only</strong> — inside labs, CTF platforms,
+            and systems I own or have explicit permission to test. I do not test systems without authorization.
+          </p>
+          <p>
+            My goal is to secure an <strong>entry-level SOC Analyst or Cybersecurity Analyst</strong> position
+            where I can contribute to real security operations, learn from experienced analysts, and keep
+            improving every single day.
+          </p>
+        </div>
+
+        <aside class="profile-panel" aria-label="Profile summary">
+          <div class="panel-head"><span class="dot cyan"></span> PROFILE PANEL</div>
+          <dl style="margin:0">
+            <div class="panel-row"><dt>Education</dt><dd>BCA Graduate</dd></div>
+            <div class="panel-row"><dt>Current Study</dt><dd>CEH Course</dd></div>
+            <div class="panel-row"><dt>Career Target</dt><dd>SOC Analyst</dd></div>
+            <div class="panel-row"><dt>Level</dt><dd>Entry-level</dd></div>
+            <div class="panel-row"><dt>Location</dt><dd>Kerala, India</dd></div>
+            <div class="panel-row"><dt>Focus</dt><dd>Threat Detection</dd></div>
+            <div class="panel-row"><dt>Status</dt><dd style="color:var(--green)">Continuously Learning</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SKILLS ================= -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">[ 02 ] // SKILLS</p>
+        <h2 class="sec-title">Cybersecurity <span>Skills</span></h2>
+        <p class="sec-sub">
+          Self-assessed, beginner-appropriate skill areas. Levels reflect study and lab practice only —
+          not professional assessment results. Every level is editable in the data file.
+        </p>
+      </div>
+
+      <div class="tabs" id="skillTabs" role="tablist" aria-label="Skill categories"></div>
+      <div class="skill-grid" id="skillGrid" role="tabpanel" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ================= EDUCATION ================= -->
+  <section id="education">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">[ 03 ] // EDUCATION</p>
+        <h2 class="sec-title">Education &amp; <span>Training</span></h2>
+        <p class="sec-sub">Academic background and current professional learning path.</p>
+      </div>
+
+      <div class="timeline">
+        <article class="tl-item">
+          <p class="tl-date">Completed</p>
+          <h3 class="tl-title">Bachelor of Computer Applications (BCA)</h3>
+          <p class="tl-org"><span class="ph">[ ADD COLLEGE NAME ]</span> &nbsp;·&nbsp; Graduation Year: <span class="ph">[ ADD GRADUATION YEAR ]</span></p>
+          <div class="tl-body">
+            <ul>
+              <li>Academic result: <span class="ph">[ ADD VERIFIED RESULT IF DESIRED ]</span></li>
+              <li>Foundations in programming, databases, networking, and software development.</li>
+              <li>Academic software project: HEMOFLOW+ (blood donation &amp; blood bank management).</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="tl-item pending">
+          <p class="tl-date">In Progress</p>
+          <h3 class="tl-title">Certified Ethical Hacker (CEH) — Course</h3>
+          <p class="tl-org">Training provider: <span class="ph">[ ADD TRAINING INSTITUTE ]</span></p>
+          <div class="tl-body">
+            <ul>
+              <li>Course status: <span class="ph">[ IN PROGRESS / COMPLETED ]</span></li>
+              <li>Course dates: <span class="ph">[ ADD DATES ]</span></li>
+              <li>Topics: reconnaissance, scanning &amp; enumeration, vulnerability assessment, web application security fundamentals, authorized penetration testing methodology.</li>
+              <li>
+                <strong style="color:var(--amber)">Note:</strong> an ongoing CEH <em>course</em> is not the same as an earned
+                CEH <em>certification</em>. Certification is only listed once the exam is passed and the credential is issued.
+              </li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CERTIFICATIONS ================= -->
+  <section id="certifications">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">[ 04 ] // CREDENTIALS</p>
+        <h2 class="sec-title">Certifications &amp; <span>Training</span></h2>
+        <p class="sec-sub">
+          Only verified credentials are shown as earned. Ongoing items are marked <em>In Progress</em>;
+          future plans are marked <em>Planned</em>.
+        </p>
+      </div>
+      <div id="certContainer"></div>
+    </div>
+  </section>
+
+  <!-- ================= LABS ================= -->
+  <section id="labs">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">[ 05 ] // HANDS-ON</p>
+        <h2 class="sec-title">Hands-on Labs &amp; <span>Security Research</span></h2>
+        <p class="sec-sub">
+          Practical learning activities on TryHackMe and similar platforms — these are personal learning
+          exercises, not professional client engagements.
+        </p>
+      </div>
+
+      <div class="note">
+        <b>Verify</b>
+        <span>
+          Completion status for each room must be confirmed before publishing. Rooms marked
+          <em>Unverified</em> are study targets. Write-ups never include passwords, tokens, private keys,
+          restricted flags, or challenge spoilers.
+        </span>
+      </div>
+
+      <div class="grid-3" id="labGrid"></div>
+    </div>
+  </section>
+
+  <!-- ================= PROJECTS ================= -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">[ 06 ] // PROJECTS</p>
+        <h2 class="sec-title">Projects &amp; <span>Builds</span></h2>
+        <p class="sec-sub">
+          Planned cybersecurity projects and one completed academic software project. Nothing is presented
+          as built until there is evidence of completion.
+        </p>
+      </div>
+
+      <div class="controls">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <label for="projectSearch" class="skip-link">Search projects</label>
+          <input type="search" id="projectSearch" placeholder="search projects…" autocomplete="off" />
+        </div>
+        <div class="filters" id="projectFilters" role="group" aria-label="Filter projects by category"></div>
+      </div>
+
+      <div class="grid-3" id="projectGrid"></div>
+    </div>
+  </section>
+
+  <!-- ================= EXPERIENCE ================= -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">[ 07 ] // EXPERIENCE</p>
+        <h2 class="sec-title">Experience &amp; <span>Internships</span></h2>
+        <p class="sec-sub">Honest entry-level presentation. No employer or internship is invented.</p>
+      </div>
+
+      <div class="timeline">
+        <article class="tl-item pending">
+          <p class="tl-date">Present</p>
+          <h3 class="tl-title">Practical Learning &amp; Career Development</h3>
+          <p class="tl-org">Self-directed · Kerala, India</p>
+          <div class="tl-body">
+            <ul>
+              <li>Building practical cybersecurity knowledge through structured CEH coursework.</li>
+              <li>Completing authorized security labs and CTF challenges on TryHackMe.</li>
+              <li>Documenting lab notes, commands, and investigation steps as technical write-ups.</li>
+              <li>Developing an academic software project (HEMOFLOW+) with authentication and role-based access control.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="tl-item pending">
+          <p class="tl-date">Professional Experience</p>
+          <h3 class="tl-title">Entry-level — seeking first SOC Analyst role</h3>
+          <p class="tl-org">No professional cybersecurity employment to date</p>
+          <div class="tl-body">
+            <p style="margin:0">
+              I am actively seeking an entry-level SOC Analyst / Cybersecurity Analyst position or internship.
+              This section is structured so future roles can be added without changing the design.
+            </p>
+          </div>
+        </article>
+
+        <article class="tl-item pending">
+          <p class="tl-date">Internships</p>
+          <h3 class="tl-title">Internship record</h3>
+          <div class="tl-body">
+            <ul>
+              <li>Company name: <span class="ph">[ ADD COMPANY NAME ]</span></li>
+              <li>Role: <span class="ph">[ ADD INTERNSHIP ROLE ]</span></li>
+              <li>Dates: <span class="ph">[ ADD DATES ]</span></li>
+              <li>Responsibilities: <span class="ph">[ ADD RESPONSIBILITIES ]</span></li>
+              <li>Skills used: <span class="ph">[ ADD SKILLS USED ]</span></li>
+              <li>Verified achievements: <span class="ph">[ ADD VERIFIED ACHIEVEMENTS ]</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TOOLS ================= -->
+  <section id="tools">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">[ 08 ] // TOOLKIT</p>
+        <h2 class="sec-title">Tools &amp; <span>Technologies</span></h2>
+        <p class="sec-sub">
+          Tools I have used or am actively learning. Presence in this list does not imply advanced proficiency.
+        </p>
+      </div>
+      <div id="toolsContainer"></div>
+    </div>
+  </section>
+
+  <!-- ================= SECURITY FOCUS ================= -->
+  <section id="focus">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">[ 09 ] // LEARNING FOCUS</p>
+        <h2 class="sec-title">My Security <span>Focus</span></h2>
+        <p class="sec-sub">
+          These are areas I am studying and practising in labs. This is a learning focus, not proof of
+          professional job experience.
+        </p>
+      </div>
+      <div class="focus-grid" id="focusGrid"></div>
+    </div>
+  </section>
+
+  <!-- ================= BLOG ================= -->
+  <section id="blog">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">[ 10 ] // WRITE-UPS</p>
+        <h2 class="sec-title">Blog &amp; <span>Technical Write-ups</span></h2>
+        <p class="sec-sub">
+          Notes from labs, fundamentals, and lessons learned — written with ethical, authorized examples only.
+        </p>
+      </div>
+
+      <div class="controls">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <label for="postSearch" class="skip-link">Search articles</label>
+          <input type="search" id="postSearch" placeholder="search articles…" autocomplete="off" />
+        </div>
+        <div class="filters" id="postFilters" role="group" aria-label="Filter articles by category"></div>
+      </div>
+
+      <div class="post-grid" id="postGrid"></div>
+    </div>
+  </section>
+
+  <!-- ================= RESUME ================= -->
+  <section id="resume">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">[ 11 ] // RESUME</p>
+        <h2 class="sec-title">My <span>Resume</span></h2>
+      </div>
+
+      <div class="resume-panel">
+        <div>
+          <h3>Joseph Abraham — Aspiring SOC Analyst</h3>
+          <p>
+            BCA graduate · CEH course in progress · Hands-on lab practice on TryHackMe and CTF platforms ·
+            Focused on threat detection, log analysis, incident response fundamentals, and network security.
+          </p>
+          <p id="resumeNote" style="margin-top:.8rem"></p>
+        </div>
+        <div class="resume-actions">
+          <a class="btn btn-primary" id="resumeDownload" href="#" download>Download Resume</a>
+          <a class="btn" id="resumeView" href="#" target="_blank" rel="noopener noreferrer">View Resume</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">[ 12 ] // CONTACT</p>
+        <h2 class="sec-title">Get In <span>Touch</span></h2>
+        <p class="sec-sub">
+          Open to entry-level SOC Analyst roles, cybersecurity internships, and learning collaborations.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div>
+          <div class="contact-list" id="contactList"></div>
+        </div>
+
+        <form id="contactForm" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="cf-name">Name</label>
+              <input id="cf-name" name="name" type="text" autocomplete="name" required />
+              <span class="err" data-err-for="cf-name"></span>
+            </div>
+            <div class="field">
+              <label for="cf-email">Email</label>
+              <input id="cf-email" name="email" type="email" autocomplete="email" required />
+              <span class="err" data-err-for="cf-email"></span>
+            </div>
+            <div class="field full">
+              <label for="cf-subject">Subject</label>
+              <input id="cf-subject" name="subject" type="text" required />
+              <span class="err" data-err-for="cf-subject"></span>
+            </div>
+            <div class="field full">
+              <label for="cf-message">Message</label>
+              <textarea id="cf-message" name="message" required></textarea>
+              <span class="err" data-err-for="cf-message"></span>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <button class="btn btn-primary" type="submit">Send Message</button>
+            <button class="btn btn-sm" type="button" id="copyEmail">Copy Email</button>
+          </div>
+
+          <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FIND ME ONLINE ================= -->
+  <section id="online">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">[ 13 ] // LINKS</p>
+        <h2 class="sec-title">Find Me <span>Online</span></h2>
+        <p class="sec-sub">
+          Only verified links are shown publicly. Items still marked as placeholders are hidden once
+          <code class="mono">CONFIG.showPlaceholders</code> is set to <code class="mono">false</code>.
+        </p>
+      </div>
+      <div class="links-grid" id="onlineGrid"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <strong>JOSEPH ABRAHAM</strong>
+        Aspiring SOC Analyst · Cybersecurity Enthusiast · CEH Learner<br />
+        Kerala, India
+        <p class="foot-msg">Detect Threats. Investigate Incidents. Protect What Matters.</p>
+      </div>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <p style="margin-top:26px;font-family:var(--mono);font-size:.68rem;color:var(--faint);letter-spacing:.06em">
+      © <span id="year"></span> Joseph Abraham. Built with semantic HTML, CSS and vanilla JavaScript.
+      All lab activity is authorized and ethical.
+    </p>
+  </div>
+</footer>
+
+<!-- ================= ARTICLE MODAL ================= -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+  <div class="modal-bg" data-close></div>
+  <div class="modal-box">
+    <button class="modal-close" type="button" data-close aria-label="Close article">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <h2 id="modalTitle"></h2>
+    <p class="post-date" id="modalDate"></p>
+    <div class="tags" id="modalTags"></div>
+    <div class="body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+/* =========================================================================
+   JOSEPH ABRAHAM — CYBERSECURITY PORTFOLIO
+   -------------------------------------------------------------------------
+   HOW TO UPDATE THIS SITE
+   1. Edit the CONFIG object  → email, resume PDF, form endpoint, placeholders
+   2. Edit the DATA object    → skills, labs, projects, certifications, posts
+   3. Nothing else needs to change. The UI renders from this data.
+   ========================================================================= */
+
+const CONFIG = {
+  /* Set to false before deploying to production — hides all [ PLACEHOLDER ] items */
+  showPlaceholders: true,
+
+  /* Path to your real resume PDF, e.g. "assets/Joseph_Abraham_Resume.pdf" */
+  resumePdf: '',
+
+  /* Contact form endpoint (e.g. Formspree: "https://formspree.io/f/xxxxxxxx")
+     Leave empty to show a "not configured" notice instead of pretending to send. */
+  formEndpoint: ''
+};
+
+/* ============================ DATA ============================ */
+const DATA = {
+
+  email: '[ADD PROFESSIONAL EMAIL]',
+
+  links: [
+    { label: 'LinkedIn',      url: '[ADD LINKEDIN URL]',           short: 'in' },
+    { label: 'GitHub',        url: '[ADD GITHUB URL]',             short: 'gh' },
+    { label: 'TryHackMe',     url: '[ADD TRYHACKME PROFILE URL]',  short: 'thm' },
+    { label: 'Hack The Box',  url: '[ADD HACKTHEBOX URL]',         short: 'htb' },
+    { label: 'Credly',        url: '[ADD CREDLY URL]',             short: 'cr' },
+    { label: 'Certifications',url: '[ADD CERTIFICATIONS URL]',     short: 'cert' },
+    { label: 'Resume PDF',    url: '[ADD RESUME PDF URL]',         short: 'cv' },
+    { label: 'Email',         url: '[ADD PROFESSIONAL EMAIL]',     short: 'mail' },
+    { label: 'Blog / Write-ups', url: '[ADD BLOG URL]',            short: 'blog' },
+    { label: 'Portfolio',     url: '[ADD DOMAIN OR DEPLOYED URL]', short: 'web' }
+  ],
+
+  /* --- SKILLS ------------------------------------------------------------
+     level: 1 = Learning · 2 = Practicing · 3 = Familiar
+     These are self-assessed study indicators, NOT assessment results.       */
+  skills: [
+    {
+      id: 'secops',
+      label: 'Security Operations',
+      items: [
+        { name: 'Security event analysis',        level: 1 },
+        { name: 'Log analysis fundamentals',      level: 2 },
+        { name: 'Threat detection fundamentals',  level: 1 },
+        { name: 'Incident response fundamentals', level: 1 },
+        { name: 'SIEM concepts',                  level: 1 },
+        { name: 'IOC identification',             level: 2 },
+        { name: 'Alert triage fundamentals',      level: 1 },
+        { name: 'MITRE ATT&CK fundamentals',      level: 1 }
+      ]
+    },
+    {
+      id: 'network',
+      label: 'Networking & Security',
+      items: [
+        { name: 'TCP/IP',                             level: 2 },
+        { name: 'DNS',                                level: 2 },
+        { name: 'HTTP / HTTPS',                       level: 2 },
+        { name: 'Common network protocols',           level: 2 },
+        { name: 'Ports and services',                 level: 2 },
+        { name: 'Firewalls',                          level: 1 },
+        { name: 'Network traffic fundamentals',       level: 2 },
+        { name: 'Vulnerability management fundamentals', level: 1 }
+      ]
+    },
+    {
+      id: 'hacking',
+      label: 'Ethical Hacking',
+      items: [
+        { name: 'CEH course concepts',                 level: 1 },
+        { name: 'Reconnaissance fundamentals',         level: 2 },
+        { name: 'Scanning and enumeration',            level: 2 },
+        { name: 'Vulnerability assessment fundamentals', level: 1 },
+        { name: 'Web application security fundamentals', level: 1 },
+        { name: 'OWASP Top 10 concepts',               level: 1 },
+        { name: 'Authorized penetration testing methodology', level: 1 }
+      ]
+    },
+    {
+      id: 'systems',
+      label: 'OS & Tools',
+      items: [
+        { name: 'Linux command line',              level: 2 },
+        { name: 'Windows security fundamentals',   level: 1 },
+        { name: 'Kali Linux',                      level: 2 },
+        { name: 'Nmap',                            level: 2 },
+        { name: 'Wireshark',                       level: 1 },
+        { name: 'Burp Suite',                      level: 1 },
+        { name: 'Metasploit Framework',            level: 1 },
+        { name: 'Git and GitHub',                  level: 2 }
+      ]
+    },
+    {
+      id: 'practice',
+      label: 'Practice',
+      items: [
+        { name: 'TryHackMe',                    level: 2 },
+        { name: 'Capture the Flag challenges',  level: 2 },
+        { name: 'Security lab documentation',   level: 2 },
+        { name: 'Basic technical reporting',    level: 2 },
+        { name: 'Security research & documentation', level: 1 }
+      ]
+    }
+  ],
+
+  /* --- CERTIFICATIONS ---------------------------------------------------- */
+  certifications: [
+    {
+      group: 'In Progress',
+      items: [
+        {
+          name: 'Certified Ethical Hacker (CEH) — Course',
+          org: '[ADD TRAINING INSTITUTE]',
+          status: 'In Progress',
+          statusClass: 'amber',
+          date: '[ADD DATES]',
+          credentialId: '[ADD CREDENTIAL ID WHEN EARNED]',
+          verify: '[ADD VERIFICATION URL]',
+          note: 'Course in progress. This is training, not an earned certification.'
+        }
+      ]
+    },
+    {
+      group: 'Planned',
+      items: [
+        { name: 'ISC2 Certified in Cybersecurity (CC)', org: '[ADD ISSUING ORGANIZATION]', status: 'Planned', statusClass: 'blue', date: '[ADD DATE]', credentialId: '[ADD CREDENTIAL ID]', verify: '[ADD VERIFICATION URL]' },
+        { name: 'CompTIA Security+',                     org: '[ADD ISSUING ORGANIZATION]', status: 'Planned', statusClass: 'blue', date: '[ADD DATE]', credentialId: '[ADD CREDENTIAL ID]', verify: '[ADD VERIFICATION URL]' },
+        { name: 'Microsoft Security Certification',      org: '[ADD ISSUING ORGANIZATION]', status: 'Planned', statusClass: 'blue', date: '[ADD DATE]', credentialId: '[ADD CREDENTIAL ID]', verify: '[ADD VERIFICATION URL]' },
+        { name: 'Cisco Cybersecurity Certification',     org: '[ADD ISSUING ORGANIZATION]', status: 'Planned', statusClass: 'blue', date: '[ADD DATE]', credentialId: '[ADD CREDENTIAL ID]', verify: '[ADD VERIFICATION URL]' }
+      ]
+    }
+  ],
+
+  /* --- LABS -------------------------------------------------------------- */
+  labs: [
+    {
+      name: 'Blue',
+      platform: 'TryHackMe',
+      difficulty: '[VERIFY DIFFICULTY]',
+      status: 'Unverified',
+      statusClass: 'amber',
+      summary: 'Windows security and vulnerability exploitation concepts in an authorized lab environment.',
+      skills: ['Windows enumeration', 'SMB', 'Vulnerability identification', 'Metasploit basics'],
+      outcomes: [
+        'Understanding how a Windows host can be enumerated in an authorized lab.',
+        'Recognising how unpatched services map to known vulnerabilities.',
+        'Documenting findings in a structured, non-spoiler format.'
+      ],
+      link: '[ADD OFFICIAL ROOM URL]',
+      writeup: '[ADD WRITE-UP LINK]'
+    },
+    {
+      name: 'Ice',
+      platform: 'TryHackMe',
+      difficulty: '[VERIFY DIFFICULTY]',
+      status: 'Unverified',
+      statusClass: 'amber',
+      summary: 'Windows service and vulnerability investigation concepts.',
+      skills: ['Service enumeration', 'Windows internals', 'Vulnerability research'],
+      outcomes: [
+        'Learning a repeatable enumeration methodology.',
+        'Mapping exposed services to potential weaknesses.',
+        'Practising ethical, authorized testing boundaries.'
+      ],
+      link: '[ADD OFFICIAL ROOM URL]',
+      writeup: '[ADD WRITE-UP LINK]'
+    },
+    {
+      name: 'Brooklyn Nine Nine',
+      platform: 'TryHackMe',
+      difficulty: '[VERIFY DIFFICULTY]',
+      status: 'Unverified',
+      statusClass: 'amber',
+      summary: 'Linux privilege escalation concepts.',
+      skills: ['Linux enumeration', 'Privilege escalation basics', 'File permissions'],
+      outcomes: [
+        'Understanding Linux permission models.',
+        'Identifying common misconfigurations in a lab.',
+        'Recording remediation notes.'
+      ],
+      link: '[ADD OFFICIAL ROOM URL]',
+      writeup: '[ADD WRITE-UP LINK]'
+    },
+    {
+      name: 'Joker CTF',
+      platform: 'TryHackMe',
+      difficulty: '[VERIFY DIFFICULTY]',
+      status: 'Unverified',
+      statusClass: 'amber',
+      summary: 'CTF investigation and enumeration practice.',
+      skills: ['Reconnaissance', 'Enumeration', 'CTF methodology'],
+      outcomes: [
+        'Building a structured note-taking workflow during investigations.',
+        'Practising patience and methodical enumeration.'
+      ],
+      link: '[ADD OFFICIAL ROOM URL]',
+      writeup: '[ADD WRITE-UP LINK]'
+    },
+    {
+      name: 'Robot',
+      platform: 'TryHackMe',
+      difficulty: '[VERIFY DIFFICULTY]',
+      status: 'Unverified',
+      statusClass: 'amber',
+      summary: 'Web application and privilege escalation concepts.',
+      skills: ['Web enumeration', 'HTTP analysis', 'Privilege escalation basics'],
+      outcomes: [
+        'Reading HTTP responses and headers for clues.',
+        'Understanding common web application weaknesses.',
+        'Documenting findings responsibly without spoilers.'
+      ],
+      link: '[ADD OFFICIAL ROOM URL]',
+      writeup: '[ADD WRITE-UP LINK]'
+    }
+  ],
+
+  /* --- PROJECTS ---------------------------------------------------------- */
+  projects: [
+    {
+      name: 'SOC Log Analysis Dashboard',
+      cat: 'planned',
+      status: 'Planned',
+      statusClass: 'amber',
+      summary: 'Analyse sample security logs, identify suspicious events, and present investigation results using synthetic or authorized datasets.',
+      problem: 'Security analysts need a clear way to surface suspicious patterns from large volumes of raw log data.',
+      objective: 'Build a dashboard that ingests sample logs, highlights anomalies, and produces a readable investigation summary.',
+      tools: ['Python', 'Log parsing', 'SIEM concepts', 'Data visualisation'],
+      contribution: '[ADD CONTRIBUTION WHEN BUILT]',
+      implementation: '[ADD IMPLEMENTATION DETAILS]',
+      security: 'Uses synthetic or explicitly authorized datasets only. No real user data.',
+      findings: '[ADD KEY FINDINGS]',
+      repo: '[ADD GITHUB REPO LINK]',
+      demo: '',
+      statusNote: 'Not yet built — planned project.'
+    },
+    {
+      name: 'Phishing Email Analysis',
+      cat: 'planned',
+      status: 'Planned',
+      statusClass: 'amber',
+      summary: 'Examine sample phishing indicators, suspicious URLs, sender information, and email headers in a safe environment.',
+      problem: 'Phishing remains one of the most common initial access vectors, and analysts must triage reports quickly.',
+      objective: 'Produce a repeatable phishing triage checklist and document analysis of sample emails.',
+      tools: ['Email header analysis', 'URL inspection', 'OSINT basics'],
+      contribution: '[ADD CONTRIBUTION WHEN BUILT]',
+      implementation: '[ADD IMPLEMENTATION DETAILS]',
+      security: 'Samples handled in an isolated environment. No live malicious links are clicked.',
+      findings: '[ADD KEY FINDINGS]',
+      repo: '[ADD GITHUB REPO LINK]',
+      demo: '',
+      statusNote: 'Not yet built — planned project.'
+    },
+    {
+      name: 'Network Traffic Analysis',
+      cat: 'planned',
+      status: 'Planned',
+      statusClass: 'amber',
+      summary: 'Use authorized sample packet captures and Wireshark to investigate protocols, connections, and unusual traffic patterns.',
+      problem: 'Understanding normal network behaviour is required before abnormal behaviour can be identified.',
+      objective: 'Analyse provided PCAP samples and document protocol behaviour and anomalies.',
+      tools: ['Wireshark', 'TCP/IP', 'DNS', 'HTTP'],
+      contribution: '[ADD CONTRIBUTION WHEN BUILT]',
+      implementation: '[ADD IMPLEMENTATION DETAILS]',
+      security: 'Only publicly available or authorized capture files are used.',
+      findings: '[ADD KEY FINDINGS]',
+      repo: '[ADD GITHUB REPO LINK]',
+      demo: '',
+      statusNote: 'Not yet built — planned project.'
+    },
+    {
+      name: 'Vulnerability Assessment Report',
+      cat: 'planned',
+      status: 'Planned',
+      statusClass: 'amber',
+      summary: 'Document findings from an intentionally vulnerable lab, assess risk, and recommend remediation.',
+      problem: 'Technical findings are only useful when communicated clearly with risk context and fixes.',
+      objective: 'Produce a professional-style assessment report for an authorized vulnerable lab target.',
+      tools: ['Nmap', 'Vulnerability assessment methodology', 'Risk rating', 'Technical reporting'],
+      contribution: '[ADD CONTRIBUTION WHEN BUILT]',
+      implementation: '[ADD IMPLEMENTATION DETAILS]',
+      security: 'Testing performed only against intentionally vulnerable lab machines with permission.',
+      findings: '[ADD KEY FINDINGS]',
+      repo: '[ADD GITHUB REPO LINK]',
+      demo: '',
+      statusNote: 'Not yet built — planned project.'
+    },
+    {
+      name: 'Threat Intelligence Dashboard',
+      cat: 'planned',
+      status: 'Planned',
+      statusClass: 'amber',
+      summary: 'Organise publicly available threat indicators and provide context for security investigations.',
+      problem: 'Raw indicators without context slow down investigations.',
+      objective: 'Aggregate public threat indicators and present them with source and context.',
+      tools: ['OSINT', 'IOC concepts', 'MITRE ATT&CK', 'Web development'],
+      contribution: '[ADD CONTRIBUTION WHEN BUILT]',
+      implementation: '[ADD IMPLEMENTATION DETAILS]',
+      security: 'Only publicly available threat data is used, with sources credited.',
+      findings: '[ADD KEY FINDINGS]',
+      repo: '[ADD GITHUB REPO LINK]',
+      demo: '',
+      statusNote: 'Not yet built — planned project.'
+    },
+    {
+      name: 'HEMOFLOW+ — Blood Donation & Blood Bank Management Website',
+      cat: 'academic',
+      status: 'Academic Project',
+      statusClass: 'cyan',
+      summary: 'A web application connecting blood donors with blood banks and recipients. An academic software project — not a cybersecurity project.',
+      problem: 'Coordinating blood donation and availability between donors, banks, and recipients is often manual and slow.',
+      objective: 'Build a web platform for donor registration, blood stock management, and request handling.',
+      tools: ['HTML', 'CSS', 'JavaScript', 'Django', 'Database technologies'],
+      contribution: '[ADD YOUR INDIVIDUAL CONTRIBUTION]',
+      implementation: '[ADD IMPLEMENTATION DETAILS — modules, roles, database design]',
+      security: 'Security-related work performed (to be verified before publishing): authentication, role-based access control, input validation, and privacy considerations for donor data.',
+      findings: '[ADD KEY LEARNING OUTCOMES]',
+      repo: '[ADD GITHUB REPO LINK]',
+      demo: '[ADD LIVE DEMO LINK IF AVAILABLE]',
+      statusNote: 'Academic project. Only verified security work is described.'
+    }
+  ],
+
+  /* --- TOOLS ------------------------------------------------------------- */
+  tools: [
+    { group: 'Security Analysis', items: [['Wireshark','Wr'], ['Nmap','Nm'], ['Burp Suite','Bs'], ['Metasploit','Ms']] },
+    { group: 'Networking',        items: [['TCP/IP','IP'], ['DNS','Dn'], ['Firewalls','Fw'], ['Ports & Services','Pt']] },
+    { group: 'Operating Systems', items: [['Linux','Lx'], ['Kali Linux','Kl'], ['Windows','Win']] },
+    { group: 'Web Security',      items: [['OWASP Top 10','OW'], ['HTTP/HTTPS','Ht']] },
+    { group: 'Development',       items: [['Git','Gt'], ['GitHub','Gh'], ['VS Code','VS'], ['Python','Py']] },
+    { group: 'Learning Platforms',items: [['TryHackMe','Th'], ['Hack The Box','Hb'], ['CTF Platforms','Ct']] }
+  ],
+
+  /* --- SECURITY FOCUS ---------------------------------------------------- */
+  focus: [
+    { title: 'Security Monitoring & Alert Triage', text: 'How alerts are generated, prioritised, and escalated in a SOC workflow — and how to separate noise from genuine signals.' },
+    { title: 'SIEM Fundamentals & Event Correlation', text: 'The role of a SIEM in collecting, normalising, and correlating events across multiple sources to surface meaningful activity.' },
+    { title: 'Windows & Linux Logs', text: 'Reading Windows Event Logs and Linux authentication logs to reconstruct what happened on a host.' },
+    { title: 'Indicators of Compromise (IOCs)', text: 'Identifying and contextualising IOCs such as unusual hashes, domains, IP addresses, and process behaviour.' },
+    { title: 'Incident Response Lifecycle', text: 'Preparation, identification, containment, eradication, recovery, and lessons learned.' },
+    { title: 'Phishing Analysis', text: 'Examining sender information, headers, URLs, and attachments to determine whether a message is malicious.' },
+    { title: 'Network Traffic Investigation', text: 'Using packet-level analysis to understand protocols, connections, and unusual traffic patterns.' },
+    { title: 'Threat Intelligence', text: 'Using public and internal threat data to add context and prioritise investigations.' },
+    { title: 'MITRE ATT&CK Framework', text: 'Mapping observed behaviour to adversary tactics and techniques to understand intent.' },
+    { title: 'Vulnerability Management', text: 'Identifying, prioritising, and tracking weaknesses — and understanding remediation options.' },
+    { title: 'Security Reporting', text: 'Writing clear, evidence-based findings with practical remediation recommendations.' }
+  ],
+
+  /* --- BLOG -------------------------------------------------------------- */
+  posts: [
+    { title: 'TryHackMe: My Note-Taking Method', date: '[ADD DATE]', cat: 'labs', tags: ['TryHackMe','Methodology'], summary: 'How I structure notes during a room so findings are easy to write up later without losing detail.' },
+    { title: 'Linux Commands Every Beginner Analyst Should Know', date: '[ADD DATE]', cat: 'fundamentals', tags: ['Linux','Fundamentals'], summary: 'A practical starter set of commands for navigation, file inspection, permissions, and process review.' },
+    { title: 'Reading Your First Nmap Scan', date: '[ADD DATE]', cat: 'tools', tags: ['Nmap','Networking'], summary: 'What the common scan types actually do, and how to interpret ports, states, and service versions.' },
+    { title: 'Wireshark Basics: Following a TCP Stream', date: '[ADD DATE]', cat: 'tools', tags: ['Wireshark','TCP/IP'], summary: 'A beginner walkthrough of capturing, filtering, and following a conversation in an authorized capture.' },
+    { title: 'OWASP Top 10 for Beginners', date: '[ADD DATE]', cat: 'web', tags: ['OWASP','Web Security'], summary: 'A plain-language overview of the most common web application risk categories and why they matter.' },
+    { title: 'A Simple SOC Investigation Walkthrough', date: '[ADD DATE]', cat: 'soc', tags: ['SOC','Incident Response'], summary: 'A fictional, illustrative walkthrough of triaging an alert from detection through to written findings.' },
+    { title: 'CTF Lessons Learned the Hard Way', date: '[ADD DATE]', cat: 'labs', tags: ['CTF','Mindset'], summary: 'Mistakes I made early on and the habits that made challenges far more approachable.' },
+    { title: 'Beginner Cybersecurity Roadmap', date: '[ADD DATE]', cat: 'fundamentals', tags: ['Career','Learning'], summary: 'A realistic, honest learning path for anyone starting from zero without overpromising timelines.' }
+  ]
+};
+
+/* =========================================================================
+   HELPERS
+   ========================================================================= */
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const esc = (s = '') => String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+const isPlaceholder = v => typeof v === 'string' && /^\s*\[.*\]\s*$/.test(v);
+const ph = v => `<span class="ph">${esc(v)}</span>`;
+const showVal = v => (isPlaceholder(v) ? ph(v) : esc(v));
+
+/* =========================================================================
+   TERMINAL IDENTITY CARD
+   ========================================================================= */
+(function terminal(){
+  const el = $('#termBody');
+  if (!el) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const lines = [
+    { t: 'cmd', text: 'whoami' },
+    { t: 'val', text: 'joseph_abraham' },
+    { t: 'cmd', text: 'cat role.txt' },
+    { t: 'val', text: 'aspiring_soc_analyst' },
+    { t: 'cmd', text: 'focus --list' },
+    { t: 'val', text: 'threat_detection | security_analysis' },
+    { t: 'cmd', text: 'status' },
+    { t: 'val', text: 'continuously_learning' }
+  ];
+
+  const render = () => {
+    el.innerHTML = lines.map(l =>
+      l.t === 'cmd'
+        ? `<div><span class="cmd">$</span> <span class="key">${esc(l.text)}</span></div>`
+        : `<div class="out">&nbsp;&nbsp;${esc(l.text)}</div>`
+    ).join('') + `<div><span class="cmd">$</span> <span class="term-cursor"></span></div>`;
+  };
+
+  if (reduce) { render(); return; }
+
+  let i = 0, out = '';
+  const step = () => {
+    if (i >= lines.length) {
+      el.innerHTML = out + `<div><span class="cmd">$</span> <span class="term-cursor"></span></div>`;
+      return;
+    }
+    const l = lines[i];
+    out += l.t === 'cmd'
+      ? `<div><span class="cmd">$</span> <span class="key">${esc(l.text)}</span></div>`
+      : `<div class="out">&nbsp;&nbsp;${esc(l.text)}</div>`;
+    el.innerHTML = out + `<div><span class="cmd">$</span> <span class="term-cursor"></span></div>`;
+    i++;
+    setTimeout(step, l.t === 'cmd' ? 260 : 180);
+  };
+  setTimeout(step, 350);
+})();
+
+/* =========================================================================
+   NAVIGATION + MOBILE MENU + SCROLL SPY + PROGRESS
+   ========================================================================= */
+(function nav(){
+  const navLinks = $$('#navLinks a');
+  const mobileMenu = $('#mobileMenu');
+  const hamburger = $('#hamburger');
+
+  /* Build mobile menu from desktop links */
+  mobileMenu.innerHTML = navLinks.map(a => `<a href="${a.getAttribute('href')}">${a.textContent}</a>`).join('');
+  const mobileLinks = $$('a', mobileMenu);
+
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', String(open));
+    hamburger.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+  });
+
+  [...navLinks, ...mobileLinks].forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }));
+
+  /* Scroll spy */
+  const sections = navLinks
+    .map(a => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const id = '#' + e.target.id;
+        [...navLinks, ...mobileLinks].forEach(a =>
+          a.classList.toggle('active', a.getAttribute('href') === id)
+        );
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    sections.forEach(s => io.observe(s));
+  }
+
+  /* Scroll progress bar */
+  const bar = $('#progress');
+  const onScroll = () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+/* =========================================================================
+   THEME TOGGLE (dark default, persisted)
+   ========================================================================= */
+(function theme(){
+  const root = document.documentElement;
+  const btn = $('#themeToggle');
+  const icon = $('#themeIcon');
+  const saved = localStorage.getItem('ja-theme');
+  if (saved) root.setAttribute('data-theme', saved);
+
+  const sunPath = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>';
+  const moonPath = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+
+  const sync = () => {
+    const dark = root.getAttribute('data-theme') !== 'light';
+    icon.innerHTML = dark ? moonPath : sunPath;
+    btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+  };
+
+  btn.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('ja-theme', next);
+    sync();
+  });
+  sync();
+})();
+
+/* =========================================================================
+   RENDER: HERO SOCIAL + ONLINE LINKS + CONTACT LIST
+   ========================================================================= */
+function linkIsLive(url){ return url && !isPlaceholder(url); }
+
+(function renderLinks(){
+  const hero = $('#heroSocial');
+  const online = $('#onlineGrid');
+  const contact = $('#contactList');
+
+  /* Hero secondary links (LinkedIn, GitHub, TryHackMe, Email) */
+  const heroKeys = ['LinkedIn', 'GitHub', 'TryHackMe', 'Email'];
+  hero.innerHTML = DATA.links
+    .filter(l => heroKeys.includes(l.label))
+    .filter(l => CONFIG.showPlaceholders || linkIsLive(l.url))
+    .map(l => linkIsLive(l.url)
+      ? `<a href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.label)}</a>`
+      : `<a href="#contact" class="is-placeholder" title="Link not supplied yet">${esc(l.label)} ${esc(l.url)}</a>`
+    ).join('');
+
+  /* Find me online */
+  const visible = DATA.links.filter(l => CONFIG.showPlaceholders || linkIsLive(l.url));
+  online.innerHTML = visible.length
+    ? visible.map(l => linkIsLive(l.url)
+        ? `<a class="online-link" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">
+             <span>${esc(l.label)}</span><span class="arrow">↗</span></a>`
+        : `<span class="online-link is-placeholder" title="Add this link in the DATA object">
+             <span>${esc(l.label)}</span><span>${esc(l.url)}</span></span>`
+      ).join('')
+    : `<p class="empty">No verified links supplied yet.</p>`;
+
+  /* Contact list */
+  const emailLive = linkIsLive(DATA.email);
+  const rows = [
+    { k: 'Email',     v: emailLive ? `<a href="mailto:${esc(DATA.email)}">${esc(DATA.email)}</a>` : ph(DATA.email) },
+    { k: 'LinkedIn',  v: showVal((DATA.links.find(l => l.label === 'LinkedIn') || {}).url || '[ADD LINKEDIN URL]') },
+    { k: 'GitHub',    v: showVal((DATA.links.find(l => l.label === 'GitHub') || {}).url || '[ADD GITHUB URL]') },
+    { k: 'TryHackMe', v: showVal((DATA.links.find(l => l.label === 'TryHackMe') || {}).url || '[ADD TRYHACKME PROFILE URL]') },
+    { k: 'Portfolio', v: showVal((DATA.links.find(l => l.label === 'Portfolio') || {}).url || '[ADD DOMAIN OR DEPLOYED URL]') },
+    { k: 'Location',  v: 'Kerala, India' }
+  ];
+  contact.innerHTML = rows.map(r =>
+    `<div class="contact-item"><span class="k">${esc(r.k)}</span><span class="v">${r.v}</span></div>`
+  ).join('');
+})();
+
+/* =========================================================================
+   RENDER: SKILLS
+   ========================================================================= */
+(function renderSkills(){
+  const tabs = $('#skillTabs');
+  const grid = $('#skillGrid');
+  const LEVELS = { 1: { label: 'Learning',   pct: 33 }, 2: { label: 'Practicing', pct: 62 }, 3: { label: 'Familiar', pct: 82 } };
+
+  tabs.innerHTML = DATA.skills.map((c, i) =>
+    `<button class="tab${i === 0 ? ' active' : ''}" role="tab" aria-selected="${i === 0}" data-cat="${c.id}">${esc(c.label)}</button>`
+  ).join('');
+
+  const draw = id => {
+    const cat = DATA.skills.find(c => c.id === id) || DATA.skills[0];
+    grid.innerHTML = cat.items.map(s => {
+      const lv = LEVELS[s.level] || LEVELS[1];
+      return `<article class="skill">
+        <span class="skill-name">${esc(s.name)}</span>
+        <div class="skill-bar"><i data-pct="${lv.pct}"></i></div>
+        <div class="skill-meta"><span>${esc(lv.label)}</span><span>self-assessed</span></div>
+      </article>`;
+    }).join('');
+    requestAnimationFrame(() => $$('.skill-bar i', grid).forEach(b => b.style.width = b.dataset.pct + '%'));
+  };
+
+  tabs.addEventListener('click', e => {
+    const btn = e.target.closest('.tab');
+    if (!btn) return;
+    $$('.tab', tabs).forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+    draw(btn.dataset.cat);
+  });
+
+  draw(DATA.skills[0].id);
+})();
+
+/* =========================================================================
+   RENDER: CERTIFICATIONS
+   ========================================================================= */
+(function renderCerts(){
+  const box = $('#certContainer');
+  box.innerHTML = DATA.certifications.map(group => {
+    const items = group.items.filter(c => CONFIG.showPlaceholders || (!isPlaceholder(c.name) && !isPlaceholder(c.org)));
+    if (!items.length) return '';
+    return `<div class="cert-group">
+      <h3><span class="dot ${group.group === 'In Progress' ? 'amber' : 'cyan'}"></span>${esc(group.group)}</h3>
+      <div class="cert-grid">
+        ${items.map(c => `
+          <article class="card">
+            <div class="cert-head">
+              <h4 class="cert-name">${esc(c.name)}</h4>
+              <span class="badge ${c.statusClass || ''}">${esc(c.status)}</span>
+            </div>
+            <p class="cert-org">${showVal(c.org)}</p>
+            <div class="cert-meta">
+              <span><b>Date:</b> ${showVal(c.date)}</span>
+              <span><b>Credential ID:</b> ${showVal(c.credentialId)}</span>
+              <span><b>Verify:</b> ${isPlaceholder(c.verify)
+                ? ph(c.verify)
+                : `<a href="${esc(c.verify)}" target="_blank" rel="noopener noreferrer">Verification link ↗</a>`}</span>
+            </div>
+            ${c.note ? `<p style="margin:.8rem 0 0;font-size:.78rem;color:var(--amber)">${esc(c.note)}</p>` : ''}
+          </article>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+})();
+
+/* =========================================================================
+   RENDER: LABS
+   ========================================================================= */
+(function renderLabs(){
+  const grid = $('#labGrid');
+  grid.innerHTML = DATA.labs.map((l, i) => `
+    <article class="card">
+      <div class="card-top">
+        <h3 class="card-title">${esc(l.name)}</h3>
+        <span class="badge ${l.statusClass}">${esc(l.status)}</span>
+      </div>
+      <p class="card-sum">${esc(l.summary)}</p>
+      <ul class="tags">
+        <li>${esc(l.platform)}</li>
+        <li>${isPlaceholder(l.difficulty) ? 'difficulty: verify' : esc(l.difficulty)}</li>
+        ${l.skills.slice(0, 2).map(s => `<li>${esc(s)}</li>`).join('')}
+      </ul>
+      <button class="link-btn" type="button" data-toggle="${i}" aria-expanded="false">View details ▾</button>
+      <div class="detail" id="lab-detail-${i}">
+        <dl>
+          <div><dt>Skills &amp; tools practised</dt><dd>${l.skills.map(esc).join(' · ')}</dd></div>
+          <div><dt>Key learning outcomes</dt><dd><ul style="display:flex;flex-direction:column;gap:.3rem">
+            ${l.outcomes.map(o => `<li style="padding-left:14px;position:relative"><span style="position:absolute;left:0;color:var(--green)">›</span>${esc(o)}</li>`).join('')}
+          </ul></dd></div>
+          <div><dt>Completion status</dt><dd>${esc(l.status)} — confirm before publishing</dd></div>
+        </dl>
+        <div class="card-actions">
+          ${isPlaceholder(l.link)
+            ? `<span class="ph">${esc(l.link)}</span>`
+            : `<a class="link-btn" href="${esc(l.link)}" target="_blank" rel="noopener noreferrer">Official room ↗</a>`}
+          ${isPlaceholder(l.writeup)
+            ? `<span class="ph">${esc(l.writeup)}</span>`
+            : `<a class="link-btn" href="${esc(l.writeup)}" target="_blank" rel="noopener noreferrer">Write-up ↗</a>`}
+        </div>
+      </div>
+    </article>
+  `).join('');
+})();
+
+/* =========================================================================
+   RENDER: PROJECTS (with search + filters)
+   ========================================================================= */
+(function renderProjects(){
+  const grid = $('#projectGrid');
+  const filters = $('#projectFilters');
+  const search = $('#projectSearch');
+  let activeCat = 'all';
+
+  const cats = [
+    { id: 'all', label: 'All' },
+    { id: 'planned', label: 'Planned' },
+    { id: 'academic', label: 'Academic' }
+  ];
+
+  filters.innerHTML = cats.map(c =>
+    `<button class="chip${c.id === 'all' ? ' active' : ''}" type="button" data-cat="${c.id}">${c.label}</button>`
+  ).join('');
+
+  const card = (p, i) => `
+    <article class="card" data-cat="${esc(p.cat)}"
+      data-search="${esc((p.name + ' ' + p.summary + ' ' + p.tools.join(' ')).toLowerCase())}">
+      <div class="card-top">
+        <h3 class="card-title">${esc(p.name)}</h3>
+        <span class="badge ${p.statusClass}">${esc(p.status)}</span>
+      </div>
+      <p class="card-sum">${esc(p.summary)}</p>
+      <ul class="tags">${p.tools.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
+      <button class="link-btn" type="button" data-toggle="p${i}" aria-expanded="false">View details ▾</button>
+      <div class="detail" id="proj-detail-p${i}">
+        <dl>
+          <div><dt>Problem statement</dt><dd>${esc(p.problem)}</dd></div>
+          <div><dt>Objective</dt><dd>${esc(p.objective)}</dd></div>
+          <div><dt>My contribution</dt><dd>${showVal(p.contribution)}</dd></div>
+          <div><dt>Implementation details</dt><dd>${showVal(p.implementation)}</dd></div>
+          <div><dt>Security considerations</dt><dd>${esc(p.security)}</dd></div>
+          <div><dt>Key findings &amp; learning outcomes</dt><dd>${showVal(p.findings)}</dd></div>
+          <div><dt>Status</dt><dd>${esc(p.statusNote)}</dd></div>
+        </dl>
+        <div class="card-actions">
+          ${isPlaceholder(p.repo)
+            ? `<span class="ph">${esc(p.repo)}</span>`
+            : `<a class="link-btn" href="${esc(p.repo)}" target="_blank" rel="noopener noreferrer">GitHub repo ↗</a>`}
+          ${p.demo && !isPlaceholder(p.demo)
+            ? `<a class="link-btn" href="${esc(p.demo)}" target="_blank" rel="noopener noreferrer">Live demo ↗</a>` : ''}
+        </div>
+      </div>
+    </article>`;
+
+  const apply = () => {
+    const q = search.value.trim().toLowerCase();
+    const visible = DATA.projects.filter(p =>
+      (activeCat === 'all' || p.cat === activeCat) &&
+      (!q || (p.name + ' ' + p.summary + ' ' + p.tools.join(' ')).toLowerCase().includes(q))
+    );
+    grid.innerHTML = visible.length
+      ? visible.map(card).join('')
+      : `<p class="empty">No projects match this filter yet.</p>`;
+    bindToggles(grid);
+  };
+
+  filters.addEventListener('click', e => {
+    const chip = e.target.closest('.chip');
+    if (!chip) return;
+    activeCat = chip.dataset.cat;
+    $$('.chip', filters).forEach(c => c.classList.toggle('active', c === chip));
+    apply();
+  });
+
+  search.addEventListener('input', apply);
+  apply();
+})();
+
+/* =========================================================================
+   EXPAND / COLLAPSE DETAILS
+   ========================================================================= */
+function bindToggles(scope){
+  $$('[data-toggle]', scope).forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.toggle;
+      const detail = document.getElementById(
+        btn.closest('#projectGrid') ? 'proj-detail-' + id : 'lab-detail-' + id
+      );
+      if (!detail) return;
+      const open = detail.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+      btn.textContent = open ? 'Hide details ▴' : 'View details ▾';
+    });
+  });
+}
+bindToggles(document);
+
+/* =========================================================================
+   RENDER: TOOLS
+   ========================================================================= */
+(function renderTools(){
+  const box = $('#toolsContainer');
+  box.innerHTML = DATA.tools.map(g => `
+    <div class="tool-group">
+      <h3>${esc(g.group)}</h3>
+      <div class="tool-grid">
+        ${g.items.map(([name, mono]) => `
+          <div class="tool">
+            <span class="tool-mono" aria-hidden="true">${esc(mono)}</span>
+            <span class="tool-name">${esc(name)}</span>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+})();
+
+/* =========================================================================
+   RENDER: SECURITY FOCUS
+   ========================================================================= */
+(function renderFocus(){
+  $('#focusGrid').innerHTML = DATA.focus.map((f, i) => `
+    <article class="focus-item">
+      <h3><span class="idx">${String(i + 1).padStart(2, '0')}</span>${esc(f.title)}</h3>
+      <p>${esc(f.text)}</p>
+    </article>`).join('');
+})();
+
+/* =========================================================================
+   RENDER: BLOG (search + category filter + modal)
+   ========================================================================= */
+(function renderBlog(){
+  const grid = $('#postGrid');
+  const filters = $('#postFilters');
+  const search = $('#postSearch');
+  let activeCat = 'all';
+
+  const catLabels = {
+    all: 'All', labs: 'Labs', fundamentals: 'Fundamentals',
+    tools: 'Tools', web: 'Web Security', soc: 'SOC'
+  };
+  const cats = ['all', ...new Set(DATA.posts.map(p => p.cat))];
+
+  filters.innerHTML = cats.map(c =>
+    `<button class="chip${c === 'all' ? ' active' : ''}" type="button" data-cat="${esc(c)}">${esc(catLabels[c] || c)}</button>`
+  ).join('');
+
+  const apply = () => {
+    const q = search.value.trim().toLowerCase();
+    const visible = DATA.posts.filter(p =>
+      (activeCat === 'all' || p.cat === activeCat) &&
+      (!q || (p.title + ' ' + p.summary + ' ' + p.tags.join(' ')).toLowerCase().includes(q))
+    );
+    grid.innerHTML = visible.length
+      ? visible.map((p, i) => `
+        <article class="card post" tabindex="0" role="button" data-post="${DATA.posts.indexOf(p)}" aria-label="Read: ${esc(p.title)}">
+          <p class="post-date">${showVal(p.date)}</p>
+          <h3>${esc(p.title)}</h3>
+          <p>${esc(p.summary)}</p>
+          <ul class="tags">${p.tags.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
+        </article>`).join('')
+      : `<p class="empty">No articles match this filter yet.</p>`;
+  };
+
+  filters.addEventListener('click', e => {
+    const chip = e.target.closest('.chip');
+    if (!chip) return;
+    activeCat = chip.dataset.cat;
+    $$('.chip', filters).forEach(c => c.classList.toggle('active', c === chip));
+    apply();
+  });
+  search.addEventListener('input', apply);
+  apply();
+
+  /* Modal */
+  const modal = $('#modal');
+  const openPost = idx => {
+    const p = DATA.posts[idx];
+    if (!p) return;
+    $('#modalTitle').textContent = p.title;
+    $('#modalDate').textContent = isPlaceholder(p.date) ? '[ ADD PUBLICATION DATE ]' : p.date;
+    $('#modalTags').innerHTML = p.tags.map(t => `<li>${esc(t)}</li>`).join('');
+    $('#modalBody').innerHTML = `
+      <p>${esc(p.summary)}</p>
+      <p style="color:var(--amber);font-family:var(--mono);font-size:.78rem">
+        [ FULL ARTICLE CONTENT — ADD IN DATA.posts ]
+      </p>
+      <p>Article layout supports headings, paragraphs, lists, inline <code>code</code> and fenced code blocks:</p>
+      <pre>$ nmap -sV --top-ports 100 &lt;authorized-lab-target&gt;
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH ...
+80/tcp   open  http    ...</pre>
+      <p style="font-size:.8rem;color:var(--faint)">
+        All examples use authorized lab targets only. No flags, credentials, or spoilers are published.
+      </p>`;
+    modal.hidden = false;
+    modal.classList.add('open');
+    $('.modal-close', modal).focus();
+    document.body.style.overflow = 'hidden';
+  };
+  const closePost = () => {
+    modal.classList.remove('open');
+    modal.hidden = true;
+    document.body.style.overflow = '';
+  };
+
+  grid.addEventListener('click', e => {
+    const card = e.target.closest('[data-post]');
+    if (card) openPost(Number(card.dataset.post));
+  });
+  grid.addEventListener('keydown', e => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const card = e.target.closest('[data-post]');
+    if (card) { e.preventDefault(); openPost(Number(card.dataset.post)); }
+  });
+  modal.addEventListener('click', e => { if (e.target.closest('[data-close]')) closePost(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closePost(); });
+})();
+
+/* =========================================================================
+   RESUME
+   ========================================================================= */
+(function resume(){
+  const note = $('#resumeNote');
+  const dl = $('#resumeDownload');
+  const view = $('#resumeView');
+
+  if (!CONFIG.resumePdf) {
+    note.innerHTML = `<span class="ph">[ ADD PDF PATH IN CONFIG.resumePdf ]</span>
+      &nbsp;Place your resume PDF in <code class="mono">assets/</code> and update the config — no file is fabricated.`;
+    [dl, view].forEach(a => {
+      a.setAttribute('href', '#resume');
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        alert('Resume PDF not supplied yet.\n\nAdd your PDF and set CONFIG.resumePdf in the script, e.g.:\nCONFIG.resumePdf = "assets/Joseph_Abraham_Resume.pdf";');
+      });
+    });
+  } else {
+    dl.href = CONFIG.resumePdf;
+    view.href = CONFIG.resumePdf;
+    note.textContent = 'Verified PDF resume available for download.';
+  }
+})();
+
+/* =========================================================================
+   CONTACT FORM (validation + optional endpoint)
+   ========================================================================= */
+(function contactForm(){
+  const form = $('#contactForm');
+  const msg = $('#formMsg');
+  const copyBtn = $('#copyEmail');
+
+  const setErr = (id, text) => {
+    const field = $('#' + id).closest('.field');
+    const err = $(`[data-err-for="${id}"]`);
+    field.classList.toggle('invalid', Boolean(text));
+    err.textContent = text || '';
+  };
+
+  const showMsg = (type, text) => {
+    msg.className = 'form-msg show ' + type;
+    msg.textContent = text;
+  };
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const name = $('#cf-name').value.trim();
+    const email = $('#cf-email').value.trim();
+    const subject = $('#cf-subject').value.trim();
+    const message = $('#cf-message').value.trim();
+    let ok = true;
+
+    setErr('cf-name', name.length < 2 ? 'Please enter your name.' : '');
+    setErr('cf-email', !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) ? 'Please enter a valid email address.' : '');
+    setErr('cf-subject', subject.length < 3 ? 'Please enter a subject.' : '');
+    setErr('cf-message', message.length < 10 ? 'Please enter at least 10 characters.' : '');
+    $$('.field').forEach(f => { if (f.classList.contains('invalid')) ok = false; });
+
+    if (!ok) { showMsg('err', 'Please correct the highlighted fields and try again.'); return; }
+
+    if (!CONFIG.formEndpoint) {
+      showMsg('info',
+        'Form validation passed, but no backend is configured. Set CONFIG.formEndpoint (e.g. a Formspree URL) in the script to enable delivery — messages are not being sent yet.');
+      return;
+    }
+
+    try {
+      const res = await fetch(CONFIG.formEndpoint, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, subject, message })
+      });
+      if (!res.ok) throw new Error('Request failed');
+      form.reset();
+      showMsg('ok', 'Message sent successfully. Thank you — I will reply as soon as possible.');
+    } catch (err) {
+      showMsg('err', 'Message could not be sent. Please email me directly instead.');
+    }
+  });
+
+  /* Copy email */
+  copyBtn.addEventListener('click', async () => {
+    if (isPlaceholder(DATA.email)) {
+      showMsg('info', 'No professional email has been added yet. Update DATA.email in the script.');
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(DATA.email);
+      showMsg('ok', `Copied: ${DATA.email}`);
+    } catch {
+      showMsg('err', 'Copy failed — please copy the address manually.');
+    }
+  });
+})();
+
+/* =========================================================================
+   FOOTER YEAR
+   ========================================================================= */
+$('#year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
